@@ -17,6 +17,7 @@ import ap.mobile.composablemap.repository.PreferencesKeys
 import ap.mobile.composablemap.repository.Result
 import ap.mobile.composablemap.optimizer.Delivery
 import ap.mobile.composablemap.optimizer.Optimizer
+import ap.mobile.composablemap.usecase.DeliveryUseCase
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.model.LatLng
@@ -105,8 +106,12 @@ class MapViewModel(app: Application) : AndroidViewModel(app) {
 
   fun getParcels() {
     // val context = getApplication<Application>().applicationContext
-    viewModelScope.launch {
-      val parcels = ParcelRepository(context = context).getAllParcels()
+    viewModelScope.launch(Dispatchers.IO) {
+
+      val parcels = DeliveryUseCase.getPackagesToDeliver(
+        ParcelRepository(context)
+      )
+
       _parcelState.update { currentState ->
         currentState.copy(parcels = parcels)
       }

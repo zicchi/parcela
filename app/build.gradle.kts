@@ -77,14 +77,29 @@ dependencies {
   implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.10.0")
 
   implementation("androidx.datastore:datastore-preferences:1.2.1")
+  implementation("com.squareup.okhttp3:logging-interceptor:5.3.2")
+  implementation("com.squareup.retrofit2:retrofit:3.0.0")
+  implementation("com.squareup.retrofit2:converter-gson:3.0.0")
 
   testImplementation(libs.junit)
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
   androidTestImplementation(platform(libs.androidx.compose.bom))
   androidTestImplementation(libs.androidx.ui.test.junit4)
   debugImplementation(libs.androidx.ui.tooling)
   debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+tasks.withType<Test> {
+  testLogging {
+    events("passed", "skipped", "failed")
+    showStandardStreams = true
+    exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+    showExceptions = true
+    showCauses = true
+    showStackTraces = true
+  }
 }
 
 // Allow references to generated code

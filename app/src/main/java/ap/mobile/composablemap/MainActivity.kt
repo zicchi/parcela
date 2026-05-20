@@ -33,6 +33,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -132,6 +133,7 @@ class MainActivity : ComponentActivity() {
           updateSwitchPreference = { key, value -> vmSettings.updateSwitchPreference(key, value) },
           clearPreference = { vmSettings.clearPreference() }
         )
+        LaunchedEffect(key1 = Unit) { vm.getParcels() }
       }
     }
   }
