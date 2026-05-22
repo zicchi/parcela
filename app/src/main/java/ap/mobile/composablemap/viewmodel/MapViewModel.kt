@@ -32,7 +32,10 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class MapViewModel(app: Application) : AndroidViewModel(app) {
+class MapViewModel(
+  app: Application,
+  private val deliveryUseCase: DeliveryUseCase = DeliveryUseCase(ParcelRepository(app.applicationContext))
+) : AndroidViewModel(app) {
 
   private val context = getApplication<Application>().applicationContext
   private val parcelRepository: ParcelRepository = ParcelRepository(context = context)
@@ -108,9 +111,7 @@ class MapViewModel(app: Application) : AndroidViewModel(app) {
     // val context = getApplication<Application>().applicationContext
     viewModelScope.launch(Dispatchers.IO) {
 
-      val parcels = DeliveryUseCase.getPackagesToDeliver(
-        ParcelRepository(context)
-      )
+      val parcels = deliveryUseCase.getPackagesToDeliver()
 
       _parcelState.update { currentState ->
         currentState.copy(parcels = parcels)

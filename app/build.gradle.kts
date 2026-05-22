@@ -80,9 +80,13 @@ dependencies {
   implementation("com.squareup.okhttp3:logging-interceptor:5.3.2")
   implementation("com.squareup.retrofit2:retrofit:3.0.0")
   implementation("com.squareup.retrofit2:converter-gson:3.0.0")
+  implementation(libs.core.ktx)
 
   testImplementation(libs.junit)
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+  testImplementation("io.mockk:mockk:1.13.12")
+  testImplementation("org.robolectric:robolectric:4.13")
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
   androidTestImplementation(platform(libs.androidx.compose.bom))
