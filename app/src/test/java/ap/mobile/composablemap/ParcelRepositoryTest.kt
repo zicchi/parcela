@@ -30,7 +30,7 @@ class ParcelRepositoryTest {
     // --- getAllParcels ---
 
     @Test
-    fun `getAllParcels returns all added parcels`() {
+    fun getAllParcels_returnsAllAddedParcels() {
         repository.addParcel(parcel1)
         repository.addParcel(parcel2)
 
@@ -40,14 +40,14 @@ class ParcelRepositoryTest {
     }
 
     @Test
-    fun `getAllParcels returns empty when no parcel added`() {
+    fun getAllParcels_returnsEmptyWhenNoParcelAdded() {
         val result = repository.getAllParcels()
 
         assertTrue(result.isEmpty())
     }
 
     @Test
-    fun `getAllParcels returns correct recipient name`() {
+    fun getAllParcels_returnsCorrectRecipientName() {
         repository.addParcel(parcel1)
 
         val result = repository.getAllParcels()
@@ -56,7 +56,7 @@ class ParcelRepositoryTest {
     }
 
     @Test
-    fun `getAllParcels returns correct parcel type`() {
+    fun getAllParcels_returnsCorrectParcelType() {
         repository.addParcel(parcel2)
 
         val result = repository.getAllParcels()
@@ -65,7 +65,7 @@ class ParcelRepositoryTest {
     }
 
     @Test(expected = Exception::class)
-    fun `getAllParcels throws exception when shouldThrowError is true`() {
+    fun getAllParcels_throwsExceptionWhenShouldThrowError() {
         repository.shouldThrowError = true
 
         repository.getAllParcels()
@@ -74,7 +74,7 @@ class ParcelRepositoryTest {
     // --- computeDelivery ---
 
     @Test
-    fun `computeDelivery returns Success when parcels exist`() = runBlocking {
+    fun computeDelivery_returnsSuccessWhenParcelsExist() = runBlocking {
         repository.addParcel(parcel1)
         repository.addParcel(parcel2)
 
@@ -84,14 +84,14 @@ class ParcelRepositoryTest {
     }
 
     @Test
-    fun `computeDelivery returns Error when no parcels`() = runBlocking {
+    fun computeDelivery_returnsErrorWhenNoParcels() = runBlocking {
         val result = repository.computeDelivery(Optimizer.ACO)
 
         assertTrue(result is Result.Error)
     }
 
     @Test
-    fun `computeDelivery returns Error when shouldThrowError is true`() = runBlocking {
+    fun computeDelivery_returnsErrorWhenShouldThrowError() = runBlocking {
         repository.addParcel(parcel1)
         repository.shouldThrowError = true
 
@@ -101,7 +101,7 @@ class ParcelRepositoryTest {
     }
 
     @Test
-    fun `computeDelivery result contains correct parcel count`() = runBlocking {
+    fun computeDelivery_resultContainsCorrectParcelCount() = runBlocking {
         repository.addParcel(parcel1)
         repository.addParcel(parcel2)
 
@@ -112,7 +112,7 @@ class ParcelRepositoryTest {
     }
 
     @Test
-    fun `computeDelivery result has positive distance and duration`() = runBlocking {
+    fun computeDelivery_resultHasPositiveDistanceAndDuration() = runBlocking {
         repository.addParcel(parcel1)
 
         val result = repository.computeDelivery(Optimizer.ABC)
@@ -123,7 +123,7 @@ class ParcelRepositoryTest {
     }
 
     @Test
-    fun `computeDelivery calls progress callback`() = runBlocking {
+    fun computeDelivery_callsProgressCallback() = runBlocking {
         repository.addParcel(parcel1)
         val progressList = mutableListOf<Float>()
 

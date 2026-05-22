@@ -19,28 +19,28 @@ class SettingsRepositoryTest {
     // --- getString ---
 
     @Test
-    fun `getString OPTIMIZER returns ACO by default`() {
+    fun getString_optimizerReturnsAcoByDefault() {
         val result = repository.getString(PreferencesKeys.OPTIMIZER)
 
         assertEquals("ACO", result)
     }
 
     @Test
-    fun `getString HOST returns localhost by default`() {
+    fun getString_hostReturnsLocalhostByDefault() {
         val result = repository.getString(PreferencesKeys.HOST)
 
         assertEquals("http://localhost", result)
     }
 
     @Test
-    fun `getString returns null for unknown key`() {
+    fun getString_returnsNullForUnknownKey() {
         val result = repository.getString("UNKNOWN_KEY")
 
         assertNull(result)
     }
 
     @Test(expected = Exception::class)
-    fun `getString throws when shouldThrowError is true`() {
+    fun getString_throwsWhenShouldThrowError() {
         repository.shouldThrowError = true
 
         repository.getString(PreferencesKeys.HOST)
@@ -49,7 +49,7 @@ class SettingsRepositoryTest {
     // --- putString ---
 
     @Test
-    fun `putString OPTIMIZER then getString returns new value`() {
+    fun putString_optimizerThenGetStringReturnsNewValue() {
         repository.putString(PreferencesKeys.OPTIMIZER, "ABC")
 
         val result = repository.getString(PreferencesKeys.OPTIMIZER)
@@ -58,7 +58,7 @@ class SettingsRepositoryTest {
     }
 
     @Test
-    fun `putString HOST updates value`() {
+    fun putString_hostUpdatesValue() {
         repository.putString(PreferencesKeys.HOST, "http://192.168.1.1:8080")
 
         val result = repository.getString(PreferencesKeys.HOST)
@@ -67,7 +67,7 @@ class SettingsRepositoryTest {
     }
 
     @Test
-    fun `putString called twice keeps last value`() {
+    fun putString_calledTwiceKeepsLastValue() {
         repository.putString(PreferencesKeys.HOST, "http://first.com")
         repository.putString(PreferencesKeys.HOST, "http://second.com")
 
@@ -79,14 +79,14 @@ class SettingsRepositoryTest {
     // --- getBoolean ---
 
     @Test
-    fun `getBoolean USE_API returns false by default`() {
+    fun getBoolean_useApiReturnsFalseByDefault() {
         val result = repository.getBoolean(PreferencesKeys.USE_API)
 
         assertFalse(result!!)
     }
 
     @Test
-    fun `getBoolean HEURISTIC_INIT returns false by default`() {
+    fun getBoolean_heuristicInitReturnsFalseByDefault() {
         val result = repository.getBoolean(PreferencesKeys.HEURISTIC_INIT)
 
         assertFalse(result!!)
@@ -95,7 +95,7 @@ class SettingsRepositoryTest {
     // --- putBoolean ---
 
     @Test
-    fun `putBoolean USE_API true then getBoolean returns true`() {
+    fun putBoolean_useApiTrueThenGetBooleanReturnsTrue() {
         repository.putBoolean(PreferencesKeys.USE_API, true)
 
         val result = repository.getBoolean(PreferencesKeys.USE_API)
@@ -104,7 +104,7 @@ class SettingsRepositoryTest {
     }
 
     @Test
-    fun `putBoolean HEURISTIC_INIT true then getBoolean returns true`() {
+    fun putBoolean_heuristicInitTrueThenGetBooleanReturnsTrue() {
         repository.putBoolean(PreferencesKeys.HEURISTIC_INIT, true)
 
         val result = repository.getBoolean(PreferencesKeys.HEURISTIC_INIT)
@@ -115,14 +115,14 @@ class SettingsRepositoryTest {
     // --- getOptimizer ---
 
     @Test
-    fun `getOptimizer returns ACO by default`() {
+    fun getOptimizer_returnsAcoByDefault() {
         val result = repository.getOptimizer()
 
         assertEquals(Optimizer.ACO, result)
     }
 
     @Test
-    fun `setOptimizer ABC then getOptimizer returns ABC`() {
+    fun setOptimizer_abcThenGetOptimizerReturnsAbc() {
         repository.setOptimizer(Optimizer.ABC)
 
         val result = repository.getOptimizer()
@@ -131,7 +131,7 @@ class SettingsRepositoryTest {
     }
 
     @Test
-    fun `setOptimizer can switch back and forth`() {
+    fun setOptimizer_canSwitchBackAndForth() {
         repository.setOptimizer(Optimizer.ABC)
         repository.setOptimizer(Optimizer.ACO)
 
